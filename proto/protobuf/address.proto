@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package proto;
+
+option go_package = ".;proto";
+
+service AddressService {
+  rpc GetAddresses(GetAddressesRequest) returns(GetAddressesResponse) {
+    option (google.api.http) = {
+      get: "/address"
+    };
+  }
+  rpc CreateAddress(AddressRequest) returns(AddressRequest) {
+    option (google.api.http) = {
+      post: "/address",
+      body: "*"
+    };
+  }
+  rpc UpdateAddress(AddressRequest) returns(AddressRequest) {
+    option (google.api.http) = {
+      put: "/address/{addressUuid}",
+      body: "*"
+    };
+  }
+  rpc DeleteAddress(AddressRequest) returns(AddressResponse) {
+    option (google.api.http) = {
+      delete: "/address/{addressUuid}"
+    };
+  }
+}
+message AddressRequest {
+  string addressUuid = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string company = 4;
+  string line1 = 5;
+  string line2 = 6;
+  string entryCode = 7;
+  string floor = 8;
+  string zipCode = 9;
+  string city = 10;
+  string phone = 11;
+  bool isDefault = 12;
+}
+
+message GetAddressesRequest {
+}
+
+message GetAddressesResponse {
+  repeated AddressRequest addresses = 1;
+}
+
+message AddressResponse {
+  string message = 1;
+}

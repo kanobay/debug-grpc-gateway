@@ -1,0 +1,9 @@
+version: "3.6"
+
+services:
+  gen-go:
+#    image: build:latest
+    image: rvolosatovs/protoc:3.2.0
+    volumes:
+      - ./proto:/opt/proto
+    working_dir: /opt/proto/
